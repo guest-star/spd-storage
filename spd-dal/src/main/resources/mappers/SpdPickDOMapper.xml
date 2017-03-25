@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spd.storage.dal.dao.SpdPickDOMapper" >
+  <resultMap id="BaseResultMap" type="com.spd.storage.dal.domain.SpdPickDO" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="req_dept_id" property="req_dept_id" jdbcType="VARCHAR" />
+    <result column="req_dept_name" property="req_dept_name" jdbcType="VARCHAR" />
+    <result column="out_dept_id" property="out_dept_id" jdbcType="VARCHAR" />
+    <result column="out_dept_name" property="out_dept_name" jdbcType="VARCHAR" />
+    <result column="out_username" property="out_username" jdbcType="VARCHAR" />
+    <result column="req_username" property="req_username" jdbcType="VARCHAR" />
+    <result column="approval_username" property="approval_username" jdbcType="VARCHAR" />
+    <result column="total_price" property="total_price" jdbcType="DOUBLE" />
+    <result column="create_time" property="create_time" jdbcType="TIME" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, req_dept_id, req_dept_name, out_dept_id, out_dept_name, out_username, req_username, 
+    approval_username, total_price, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.spd.storage.dal.domain.SpdPickDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from s_pick
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.spd.storage.dal.domain.SpdPickDOExample" >
+    delete from s_pick
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.spd.storage.dal.domain.SpdPickDO" >
+    insert into s_pick (id, name, req_dept_id, 
+      req_dept_name, out_dept_id, out_dept_name, 
+      out_username, req_username, approval_username, 
+      total_price, create_time)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{req_dept_id,jdbcType=VARCHAR}, 
+      #{req_dept_name,jdbcType=VARCHAR}, #{out_dept_id,jdbcType=VARCHAR}, #{out_dept_name,jdbcType=VARCHAR}, 
+      #{out_username,jdbcType=VARCHAR}, #{req_username,jdbcType=VARCHAR}, #{approval_username,jdbcType=VARCHAR}, 
+      #{total_price,jdbcType=DOUBLE}, #{create_time,jdbcType=TIME})
+  </insert>
+  <insert id="insertSelective" parameterType="com.spd.storage.dal.domain.SpdPickDO" >
+    insert into s_pick
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="req_dept_id != null" >
+        req_dept_id,
+      </if>
+      <if test="req_dept_name != null" >
+        req_dept_name,
+      </if>
+      <if test="out_dept_id != null" >
+        out_dept_id,
+      </if>
+      <if test="out_dept_name != null" >
+        out_dept_name,
+      </if>
+      <if test="out_username != null" >
+        out_username,
+      </if>
+      <if test="req_username != null" >
+        req_username,
+      </if>
+      <if test="approval_username != null" >
+        approval_username,
+      </if>
+      <if test="total_price != null" >
+        total_price,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="req_dept_id != null" >
+        #{req_dept_id,jdbcType=VARCHAR},
+      </if>
+      <if test="req_dept_name != null" >
+        #{req_dept_name,jdbcType=VARCHAR},
+      </if>
+      <if test="out_dept_id != null" >
+        #{out_dept_id,jdbcType=VARCHAR},
+      </if>
+      <if test="out_dept_name != null" >
+        #{out_dept_name,jdbcType=VARCHAR},
+      </if>
+      <if test="out_username != null" >
+        #{out_username,jdbcType=VARCHAR},
+      </if>
+      <if test="req_username != null" >
+        #{req_username,jdbcType=VARCHAR},
+      </if>
+      <if test="approval_username != null" >
+        #{approval_username,jdbcType=VARCHAR},
+      </if>
+      <if test="total_price != null" >
+        #{total_price,jdbcType=DOUBLE},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIME},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update s_pick
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.req_dept_id != null" >
+        req_dept_id = #{record.req_dept_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.req_dept_name != null" >
+        req_dept_name = #{record.req_dept_name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.out_dept_id != null" >
+        out_dept_id = #{record.out_dept_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.out_dept_name != null" >
+        out_dept_name = #{record.out_dept_name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.out_username != null" >
+        out_username = #{record.out_username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.req_username != null" >
+        req_username = #{record.req_username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approval_username != null" >
+        approval_username = #{record.approval_username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.total_price != null" >
+        total_price = #{record.total_price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.create_time != null" >
+        create_time = #{record.create_time,jdbcType=TIME},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update s_pick
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      req_dept_id = #{record.req_dept_id,jdbcType=VARCHAR},
+      req_dept_name = #{record.req_dept_name,jdbcType=VARCHAR},
+      out_dept_id = #{record.out_dept_id,jdbcType=VARCHAR},
+      out_dept_name = #{record.out_dept_name,jdbcType=VARCHAR},
+      out_username = #{record.out_username,jdbcType=VARCHAR},
+      req_username = #{record.req_username,jdbcType=VARCHAR},
+      approval_username = #{record.approval_username,jdbcType=VARCHAR},
+      total_price = #{record.total_price,jdbcType=DOUBLE},
+      create_time = #{record.create_time,jdbcType=TIME}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

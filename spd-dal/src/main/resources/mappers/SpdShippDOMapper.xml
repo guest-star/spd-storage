@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spd.storage.dal.dao.SpdShippDOMapper" >
+  <resultMap id="BaseResultMap" type="com.spd.storage.dal.domain.SpdShippDO" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="create_time" property="create_time" jdbcType="TIME" />
+    <result column="receiver" property="receiver" jdbcType="VARCHAR" />
+    <result column="receiver_address" property="receiver_address" jdbcType="VARCHAR" />
+    <result column="sender" property="sender" jdbcType="VARCHAR" />
+    <result column="receiver_phone" property="receiver_phone" jdbcType="VARCHAR" />
+    <result column="use_dept_name" property="use_dept_name" jdbcType="VARCHAR" />
+    <result column="sender_phone" property="sender_phone" jdbcType="VARCHAR" />
+    <result column="billing_date" property="billing_date" jdbcType="TIME" />
+    <result column="total_capital" property="total_capital" jdbcType="VARCHAR" />
+    <result column="total_lowercase" property="total_lowercase" jdbcType="DOUBLE" />
+    <result column="receiver_accept_user" property="receiver_accept_user" jdbcType="VARCHAR" />
+    <result column="send_date" property="send_date" jdbcType="TIME" />
+    <result column="receipt_user" property="receipt_user" jdbcType="VARCHAR" />
+    <result column="accept_date" property="accept_date" jdbcType="TIME" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="bak" property="bak" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, create_time, receiver, receiver_address, sender, receiver_phone, use_dept_name, 
+    sender_phone, billing_date, total_capital, total_lowercase, receiver_accept_user, 
+    send_date, receipt_user, accept_date, remarks, bak
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.spd.storage.dal.domain.SpdShippDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from s_shipp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.spd.storage.dal.domain.SpdShippDOExample" >
+    delete from s_shipp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.spd.storage.dal.domain.SpdShippDO" >
+    insert into s_shipp (id, name, create_time, 
+      receiver, receiver_address, sender, 
+      receiver_phone, use_dept_name, sender_phone, 
+      billing_date, total_capital, total_lowercase, 
+      receiver_accept_user, send_date, receipt_user, 
+      accept_date, remarks, bak
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{create_time,jdbcType=TIME}, 
+      #{receiver,jdbcType=VARCHAR}, #{receiver_address,jdbcType=VARCHAR}, #{sender,jdbcType=VARCHAR}, 
+      #{receiver_phone,jdbcType=VARCHAR}, #{use_dept_name,jdbcType=VARCHAR}, #{sender_phone,jdbcType=VARCHAR}, 
+      #{billing_date,jdbcType=TIME}, #{total_capital,jdbcType=VARCHAR}, #{total_lowercase,jdbcType=DOUBLE}, 
+      #{receiver_accept_user,jdbcType=VARCHAR}, #{send_date,jdbcType=TIME}, #{receipt_user,jdbcType=VARCHAR}, 
+      #{accept_date,jdbcType=TIME}, #{remarks,jdbcType=VARCHAR}, #{bak,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.spd.storage.dal.domain.SpdShippDO" >
+    insert into s_shipp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="receiver != null" >
+        receiver,
+      </if>
+      <if test="receiver_address != null" >
+        receiver_address,
+      </if>
+      <if test="sender != null" >
+        sender,
+      </if>
+      <if test="receiver_phone != null" >
+        receiver_phone,
+      </if>
+      <if test="use_dept_name != null" >
+        use_dept_name,
+      </if>
+      <if test="sender_phone != null" >
+        sender_phone,
+      </if>
+      <if test="billing_date != null" >
+        billing_date,
+      </if>
+      <if test="total_capital != null" >
+        total_capital,
+      </if>
+      <if test="total_lowercase != null" >
+        total_lowercase,
+      </if>
+      <if test="receiver_accept_user != null" >
+        receiver_accept_user,
+      </if>
+      <if test="send_date != null" >
+        send_date,
+      </if>
+      <if test="receipt_user != null" >
+        receipt_user,
+      </if>
+      <if test="accept_date != null" >
+        accept_date,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="bak != null" >
+        bak,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIME},
+      </if>
+      <if test="receiver != null" >
+        #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_address != null" >
+        #{receiver_address,jdbcType=VARCHAR},
+      </if>
+      <if test="sender != null" >
+        #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_phone != null" >
+        #{receiver_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="use_dept_name != null" >
+        #{use_dept_name,jdbcType=VARCHAR},
+      </if>
+      <if test="sender_phone != null" >
+        #{sender_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="billing_date != null" >
+        #{billing_date,jdbcType=TIME},
+      </if>
+      <if test="total_capital != null" >
+        #{total_capital,jdbcType=VARCHAR},
+      </if>
+      <if test="total_lowercase != null" >
+        #{total_lowercase,jdbcType=DOUBLE},
+      </if>
+      <if test="receiver_accept_user != null" >
+        #{receiver_accept_user,jdbcType=VARCHAR},
+      </if>
+      <if test="send_date != null" >
+        #{send_date,jdbcType=TIME},
+      </if>
+      <if test="receipt_user != null" >
+        #{receipt_user,jdbcType=VARCHAR},
+      </if>
+      <if test="accept_date != null" >
+        #{accept_date,jdbcType=TIME},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="bak != null" >
+        #{bak,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update s_shipp
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.create_time != null" >
+        create_time = #{record.create_time,jdbcType=TIME},
+      </if>
+      <if test="record.receiver != null" >
+        receiver = #{record.receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiver_address != null" >
+        receiver_address = #{record.receiver_address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sender != null" >
+        sender = #{record.sender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiver_phone != null" >
+        receiver_phone = #{record.receiver_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.use_dept_name != null" >
+        use_dept_name = #{record.use_dept_name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sender_phone != null" >
+        sender_phone = #{record.sender_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billing_date != null" >
+        billing_date = #{record.billing_date,jdbcType=TIME},
+      </if>
+      <if test="record.total_capital != null" >
+        total_capital = #{record.total_capital,jdbcType=VARCHAR},
+      </if>
+      <if test="record.total_lowercase != null" >
+        total_lowercase = #{record.total_lowercase,jdbcType=DOUBLE},
+      </if>
+      <if test="record.receiver_accept_user != null" >
+        receiver_accept_user = #{record.receiver_accept_user,jdbcType=VARCHAR},
+      </if>
+      <if test="record.send_date != null" >
+        send_date = #{record.send_date,jdbcType=TIME},
+      </if>
+      <if test="record.receipt_user != null" >
+        receipt_user = #{record.receipt_user,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accept_date != null" >
+        accept_date = #{record.accept_date,jdbcType=TIME},
+      </if>
+      <if test="record.remarks != null" >
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak != null" >
+        bak = #{record.bak,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update s_shipp
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      create_time = #{record.create_time,jdbcType=TIME},
+      receiver = #{record.receiver,jdbcType=VARCHAR},
+      receiver_address = #{record.receiver_address,jdbcType=VARCHAR},
+      sender = #{record.sender,jdbcType=VARCHAR},
+      receiver_phone = #{record.receiver_phone,jdbcType=VARCHAR},
+      use_dept_name = #{record.use_dept_name,jdbcType=VARCHAR},
+      sender_phone = #{record.sender_phone,jdbcType=VARCHAR},
+      billing_date = #{record.billing_date,jdbcType=TIME},
+      total_capital = #{record.total_capital,jdbcType=VARCHAR},
+      total_lowercase = #{record.total_lowercase,jdbcType=DOUBLE},
+      receiver_accept_user = #{record.receiver_accept_user,jdbcType=VARCHAR},
+      send_date = #{record.send_date,jdbcType=TIME},
+      receipt_user = #{record.receipt_user,jdbcType=VARCHAR},
+      accept_date = #{record.accept_date,jdbcType=TIME},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      bak = #{record.bak,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

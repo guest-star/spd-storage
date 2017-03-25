@@ -98,7 +98,7 @@ public class DataSourceConfiguration implements TransactionManagementConfigurer 
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource());
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:mappers/*-mapper.xml"));
+        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:mappers/*Mapper.xml"));
         sqlSessionFactoryBean.setTypeHandlersPackage("com.zto.bill.dal.domain");
         sqlSessionFactoryBean.setConfigLocation(resolver.getResource("classpath:sqlMapConfig.xml"));
         PageHelper plugin = new PageHelper();

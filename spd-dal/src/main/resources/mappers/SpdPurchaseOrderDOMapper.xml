@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spd.storage.dal.dao.SpdPurchaseOrderDOMapper" >
+  <resultMap id="BaseResultMap" type="com.spd.storage.dal.domain.SpdPurchaseOrderDO" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="dept_id" property="dept_id" jdbcType="VARCHAR" />
+    <result column="dep_name" property="dep_name" jdbcType="VARCHAR" />
+    <result column="create_time" property="create_time" jdbcType="TIME" />
+    <result column="category_id" property="category_id" jdbcType="VARCHAR" />
+    <result column="plan_number" property="plan_number" jdbcType="DOUBLE" />
+    <result column="refer_unit_price" property="refer_unit_price" jdbcType="DOUBLE" />
+    <result column="approval_number" property="approval_number" jdbcType="DOUBLE" />
+    <result column="already_buy_number" property="already_buy_number" jdbcType="DOUBLE" />
+    <result column="plan_date" property="plan_date" jdbcType="DATE" />
+    <result column="bak" property="bak" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, dept_id, dep_name, create_time, category_id, plan_number, refer_unit_price, 
+    approval_number, already_buy_number, plan_date, bak
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.spd.storage.dal.domain.SpdPurchaseOrderDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from s_purchase_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.spd.storage.dal.domain.SpdPurchaseOrderDOExample" >
+    delete from s_purchase_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.spd.storage.dal.domain.SpdPurchaseOrderDO" >
+    insert into s_purchase_order (id, name, dept_id, 
+      dep_name, create_time, category_id, 
+      plan_number, refer_unit_price, approval_number, 
+      already_buy_number, plan_date, bak
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{dept_id,jdbcType=VARCHAR}, 
+      #{dep_name,jdbcType=VARCHAR}, #{create_time,jdbcType=TIME}, #{category_id,jdbcType=VARCHAR}, 
+      #{plan_number,jdbcType=DOUBLE}, #{refer_unit_price,jdbcType=DOUBLE}, #{approval_number,jdbcType=DOUBLE}, 
+      #{already_buy_number,jdbcType=DOUBLE}, #{plan_date,jdbcType=DATE}, #{bak,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.spd.storage.dal.domain.SpdPurchaseOrderDO" >
+    insert into s_purchase_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="dept_id != null" >
+        dept_id,
+      </if>
+      <if test="dep_name != null" >
+        dep_name,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="category_id != null" >
+        category_id,
+      </if>
+      <if test="plan_number != null" >
+        plan_number,
+      </if>
+      <if test="refer_unit_price != null" >
+        refer_unit_price,
+      </if>
+      <if test="approval_number != null" >
+        approval_number,
+      </if>
+      <if test="already_buy_number != null" >
+        already_buy_number,
+      </if>
+      <if test="plan_date != null" >
+        plan_date,
+      </if>
+      <if test="bak != null" >
+        bak,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="dept_id != null" >
+        #{dept_id,jdbcType=VARCHAR},
+      </if>
+      <if test="dep_name != null" >
+        #{dep_name,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIME},
+      </if>
+      <if test="category_id != null" >
+        #{category_id,jdbcType=VARCHAR},
+      </if>
+      <if test="plan_number != null" >
+        #{plan_number,jdbcType=DOUBLE},
+      </if>
+      <if test="refer_unit_price != null" >
+        #{refer_unit_price,jdbcType=DOUBLE},
+      </if>
+      <if test="approval_number != null" >
+        #{approval_number,jdbcType=DOUBLE},
+      </if>
+      <if test="already_buy_number != null" >
+        #{already_buy_number,jdbcType=DOUBLE},
+      </if>
+      <if test="plan_date != null" >
+        #{plan_date,jdbcType=DATE},
+      </if>
+      <if test="bak != null" >
+        #{bak,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update s_purchase_order
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dept_id != null" >
+        dept_id = #{record.dept_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dep_name != null" >
+        dep_name = #{record.dep_name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.create_time != null" >
+        create_time = #{record.create_time,jdbcType=TIME},
+      </if>
+      <if test="record.category_id != null" >
+        category_id = #{record.category_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plan_number != null" >
+        plan_number = #{record.plan_number,jdbcType=DOUBLE},
+      </if>
+      <if test="record.refer_unit_price != null" >
+        refer_unit_price = #{record.refer_unit_price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.approval_number != null" >
+        approval_number = #{record.approval_number,jdbcType=DOUBLE},
+      </if>
+      <if test="record.already_buy_number != null" >
+        already_buy_number = #{record.already_buy_number,jdbcType=DOUBLE},
+      </if>
+      <if test="record.plan_date != null" >
+        plan_date = #{record.plan_date,jdbcType=DATE},
+      </if>
+      <if test="record.bak != null" >
+        bak = #{record.bak,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update s_purchase_order
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      dept_id = #{record.dept_id,jdbcType=VARCHAR},
+      dep_name = #{record.dep_name,jdbcType=VARCHAR},
+      create_time = #{record.create_time,jdbcType=TIME},
+      category_id = #{record.category_id,jdbcType=VARCHAR},
+      plan_number = #{record.plan_number,jdbcType=DOUBLE},
+      refer_unit_price = #{record.refer_unit_price,jdbcType=DOUBLE},
+      approval_number = #{record.approval_number,jdbcType=DOUBLE},
+      already_buy_number = #{record.already_buy_number,jdbcType=DOUBLE},
+      plan_date = #{record.plan_date,jdbcType=DATE},
+      bak = #{record.bak,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
